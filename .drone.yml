@@ -11,7 +11,7 @@ steps:
     - ls
   when: 
     branch: 
-    - main
+    - master
     event:
     - push
     - pull_request
