@@ -1,0 +1,17 @@
+kind: pipeline
+type: docker
+name: default
+steps:
+- name: build-cms-ui
+  image: node
+  commands:
+    - ls
+    - sudo npm install
+    - npm run build
+    - ls
+  when: 
+    branch: 
+    - main
+    event:
+    - push
+    - pull_request

@@ -1,0 +1,80 @@
+@import 'antd/dist/antd.css';
+
+.header {
+  background-color: #fff;
+  box-shadow: 2px 2px 3px #ccc;
+  z-index: 101;
+  }
+  
+  .header .toggle{
+  float: left;
+  padding: 0px;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 20px;
+  }
+
+  header{
+      width: 100%;
+      height: 50px;
+  }
+.header h2{
+  padding: 0px 0 10px 10px;
+}
+
+.headerImage img{
+  height: 50%;
+  width: 50%;
+}
+
+.is-invalid{
+  border-color: #dc3545;
+}
+
+.is-invalid:hover{
+  border-color:red;
+}
+
+.is-invalid:focus{
+  border-color: #dc3545;
+}
+
+.invalid-feedback{
+  color: red;
+}
+
+.carousel{
+  padding: 20px;
+}
+
+.footer{
+  background-color: #d3e0ea;
+  width: 100%;
+  text-align: center;
+}
+
+.login-height {
+  height: calc(100vh - 120px);
+  margin-bottom: 20px;
+}
+
+.login-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+
+.content-edit{
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.ant-table-thead tr .ant-table-selection-column div {
+  display: none;
+}
+
+.checkBox{
+  padding: 5px;
+}
