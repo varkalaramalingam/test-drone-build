@@ -3,14 +3,11 @@ type: docker
 name: default
 steps:
 - name: build-cms-ui
-  image: node
+  image: node:14-alpine
   commands:
-    - node -v
-    - npm -v
     - node -v
     - npm -v
     - ls
     - npm install
-    - export NODE_OPTIONS="--max-old-space-size=4096"
     - npm run build
     - ls
