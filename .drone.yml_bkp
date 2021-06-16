@@ -5,12 +5,14 @@ steps:
 - name: build-cms-ui
   image: node
   commands:
-    - node -v
-    - npm -v
-    - node -v
-    - npm -v
     - ls
     - npm install
     - export NODE_OPTIONS="--max-old-space-size=4096"
     - npm run build
     - ls
+  when: 
+    branch: 
+    - master
+    event:
+    - push
+    - pull_request
