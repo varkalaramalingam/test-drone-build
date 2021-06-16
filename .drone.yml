@@ -7,7 +7,6 @@ steps:
   commands:
     - node -v
     - npm -v
-    - npm -v
     - ls
     - npm install
     - export NODE_OPTIONS="--max-old-space-size=4096"
