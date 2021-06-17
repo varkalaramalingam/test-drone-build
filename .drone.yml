@@ -40,7 +40,7 @@ steps:
 #    - pull_request
 - name: ssh commands
   image: appleboy/drone-ssh
-  # settings:
+  settings:
     host: 52.66.213.37
     username: ubuntu
     port: 22
