@@ -47,6 +47,7 @@ steps:
     key:
       from_secret: ssh_key
     script:
+      - ls
       - export ONE=1
       - export LAST_BUILD_NUMBER=`expr ${DRONE_BUILD_NUMBER} - ${ONE}`
       - sudo chown ubuntu:ubuntu /var/run/docker.sock
