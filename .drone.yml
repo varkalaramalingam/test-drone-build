@@ -2,55 +2,54 @@ kind: pipeline
 type: docker
 name: default
 steps:
-- name: build-cms-ui
-  image: node:14-alpine
-  commands:
-    - node -v
-    - npm -v
-    - ls
-    - npm install
-    - npm run build
-    - ls
-  when: 
-    branch: 
-    - master
-    event:
-    - push
-    - pull_request
-# to push docker image into ecrrepo
-- name:  push cms-ui image to ecr
-  image: plugins/ecr
-  settings:
-    access_key:
-      from_secret: aws_access_key_id
-    secret_key:
-      from_secret: aws_secret_access_key
-    region: 
-      from_secret: aws_default_region
-    tags:
-      - latest
-      - build-v${DRONE_BUILD_NUMBER}
-    repo: 233304420478.dkr.ecr.ap-south-1.amazonaws.com/cms
-    registry: 233304420478.dkr.ecr.ap-south-1.amazonaws.com/cms
-  when:
-    branch:
-    - master
-    event:
-    - push
-    - pull_request
+#- name: build-cms-ui
+#  image: node:14-alpine
+#  commands:
+#    - node -v
+#    - npm -v
+#    - ls
+#    - npm install
+#    - npm run build
+#    - ls
+#  when: 
+#    branch: 
+#    - master
+#    event:
+#    - push
+#    - pull_request
+## to push docker image into ecrrepo
+#- name:  push cms-ui image to ecr
+#  image: plugins/ecr
+#  settings:
+#    access_key:
+#            # from_secret: aws_access_key_id
+#    secret_key:
+#      from_secret: aws_secret_access_key
+#    region: 
+#      from_secret: aws_default_region
+#    tags:
+#      - latest
+#      - build-v${DRONE_BUILD_NUMBER}
+#        # repo: 233304420478.dkr.ecr.ap-south-1.amazonaws.com/cms
+#    registry: 233304420478.dkr.ecr.ap-south-1.amazonaws.com/cms
+#  when:
+#    branch:
+#    - master
+#    event:
+#    - push
+#    - pull_request
 - name: ssh commands
   image: appleboy/drone-ssh
-  settings:
-    host: 52.66.223.30
+  # settings:
+    host: 52.66.213.37
     username: ubuntu
     port: 22
     key:
       from_secret: ssh_key
     script:
-      - sudo bash
       - sudo chown ubuntu:ubuntu /var/run/docker.sock
-      - sudo aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 233304420478.dkr.ecr.ap-south-1.amazonaws.com
-      - sudo docker run -dit -p 81:80 --name cms-ui-bv${DRONE_BUILD_NUMBER} 233304420478.dkr.ecr.ap-south-1.amazonaws.com/cms
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 233304420478.dkr.ecr.ap-south-1.amazonaws.com
+      - docker run -dit -p 81:80 --name cms-ui-bv14 233304420478.dkr.ecr.ap-south-1.amazonaws.com/cms:build-v14
   when:
     branch:
     - master
