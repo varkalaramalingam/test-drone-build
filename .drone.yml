@@ -14,8 +14,8 @@ steps:
       - ls
       - export LAST_BUILD_NUMBER=`expr ${DRONE_BUILD_NUMBER} - 1`
       - sudo chown ubuntu:ubuntu /var/run/docker.sock
-      - docker stop cms-ui-bv${LAST_BUILD_NUMBER}
-      - echo $LAST_BUILD_NUMBER 
+      - docker stop cms-ui-bv$LAST_BUILD_NUMBER
+      - echo $LAST_BUILD_NUMBER
   when:
     branch:
     - master
