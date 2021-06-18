@@ -3,15 +3,60 @@ type: docker
 name: default
 steps:
 - name: build-cms-ui
-  image: node
+  image: node:14-alpine
   commands:
+    - node -v
+    - npm -v
     - ls
     - npm install
-    - export NODE_OPTIONS="--max-old-space-size=4096"
     - npm run build
     - ls
   when: 
     branch: 
+    - master
+    event:
+    - push
+    - pull_request
+# to push docker image into ecrrepo
+- name:  push cms-ui image to ecr
+  image: plugins/ecr
+  settings:
+    access_key:
+      from_secret: aws_access_key_id
+    secret_key:
+      from_secret: aws_secret_access_key
+    region: 
+      from_secret: aws_default_region
+    tags:
+      - latest
+      - build-v${DRONE_BUILD_NUMBER}
+    repo: 932729296665.dkr.ecr.us-east-2.amazonaws.com/cms
+    registry: 932729296665.dkr.ecr.us-east-2.amazonaws.com
+  when:
+    branch:
+    - master
+    event:
+    - push
+    - pull_request
+- name: ssh commands
+  image: appleboy/drone-ssh
+  settings:
+    host: 172.31.41.62
+    username: ubuntu
+    port: 22
+    key:
+      from_secret: ssh_key
+    script:
+      - ls
+      #      - export ONE=1
+      - export LAST_BUILD_NUMBER=`expr ${DRONE_BUILD_NUMBER} - 1`
+      - sudo chown ubuntu:ubuntu /var/run/docker.sock
+      #- docker stop cms-ui-bv${LAST_BUILD_NUMBER}
+      - echo $LAST_BUILD_NUMBER 
+      - aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 932729296665.dkr.ecr.us-east-2.amazonaws.com
+      - docker run -dit -p 81:80 --name cms-ui-bv${DRONE_BUILD_NUMBER} 932729296665.dkr.ecr.us-east-2.amazonaws.com/cms:build-v${DRONE_BUILD_NUMBER}
+  when:
+    branch:
     - master
     event:
     - push
