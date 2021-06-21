@@ -13,6 +13,7 @@ steps:
   commands:
     - node -v
     - npm -v
+    - ls
 trigger:
   branch:
   - master
