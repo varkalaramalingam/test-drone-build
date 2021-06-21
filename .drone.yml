@@ -7,6 +7,14 @@ steps:
   commands:
     - node -v
     - npm -v
-  when:
-    branch: master
-    event: push
+    - ls
+- name: test
+  image: node:14-alpine
+  commands:
+    - node -v
+    - npm -v
+trigger:
+  branch:
+  - master
+  event:
+  - push
