@@ -8,6 +8,11 @@ steps:
     - node -v
     - npm -v
     - ls
+- name: test
+  image: node:14-alpine
+  commands:
+    - node -v
+    - npm -v
 trigger:
   branch:
   - master
