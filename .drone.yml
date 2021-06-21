@@ -8,10 +8,8 @@ steps:
     - node -v
     - npm -v
     - ls
- #trigger:
-  when:
-    branch: 
-      include:
-        - master
-    event:
-    - push
+trigger:
+  branch:
+  - master
+  event:
+  - push
