@@ -11,6 +11,7 @@ steps:
  #trigger:
   when:
     branch: 
-    - master
+      include:
+        - master
     event:
     - push
