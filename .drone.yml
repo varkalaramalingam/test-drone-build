@@ -9,6 +9,8 @@ steps:
     - npm -v
     - ls
  #trigger:
-when:
-  branch: master
-  event: push
+  when:
+    branch: 
+    - master
+    event:
+    - push
