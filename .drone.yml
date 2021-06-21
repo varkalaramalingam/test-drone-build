@@ -7,6 +7,8 @@ steps:
   commands:
     - node -v
     - npm -v
-  when:
+    - ls
+# when:
+  trigger:
     branch: master
     event: push
