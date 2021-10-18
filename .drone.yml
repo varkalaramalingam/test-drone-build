@@ -6,6 +6,7 @@ steps:
   image: node:14-alpine
   commands:
     - ls
+    - ls
     - node -v
     - npm -v
     - ls
