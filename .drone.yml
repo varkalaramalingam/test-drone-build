@@ -7,6 +7,7 @@ steps:
   commands:
     - ls
     - ls
+    - ls
     - node -v
     - npm -v
     - ls
