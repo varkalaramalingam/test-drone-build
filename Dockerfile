@@ -1,2 +1,2 @@
-FROM ramalingam81/apache2-base
+FROM httpd
 COPY ./index.html /var/www/html/index.html
