@@ -1,2 +1,2 @@
 FROM ramalingam81/apache2-base
-COPY ./build/. /var/www/html/.
+COPY ./index.html. /var/www/html/index.html
