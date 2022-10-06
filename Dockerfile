@@ -1,2 +1,2 @@
 FROM httpd
-COPY ./index.html /var/www/html/index.html
+COPY ./build/. /usr/local/apache2/htdocs/.
