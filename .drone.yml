@@ -2,6 +2,12 @@ kind: pipeline
 type: docker
 name: default
 steps:
+- name: build-dashboard-ui
+  image: node:14-alpine
+  commands:
+    - npm install
+    - npm run build
+    - ls
 - name:  push image to ecr
   image: plugins/ecr
   settings:
