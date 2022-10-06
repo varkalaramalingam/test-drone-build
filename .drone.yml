@@ -2,22 +2,17 @@ kind: pipeline
 type: docker
 name: default
 steps:
-- name: build-cms-ui
-  image: node:14-alpine
-  commands:
-    - node -v
-    - npm -v
-    - ls
-- name: test
-  image: node:14-alpine
-  commands:
-    - node -v
-    - npm -v
-    - ls
-trigger:
-  branch:
-  - master
-  event:
-  - push
-#testtesttest
-#######################################
+- name:  push image to ecr
+  image: plugins/ecr
+  settings:
+    access_key:
+      from_secret: aws_access_key_id
+    secret_key:
+      from_secret: aws_secret_access_key
+    region: 
+      from_secret: aws_default_region
+    tags:
+      - latest
+      - build-v${DRONE_BUILD_NUMBER}
+    repo: 164749927300.dkr.ecr.ap-south-1.amazonaws.com/drone-test
+    registry: 164749927300.dkr.ecr.ap-south-1.amazonaws.com
